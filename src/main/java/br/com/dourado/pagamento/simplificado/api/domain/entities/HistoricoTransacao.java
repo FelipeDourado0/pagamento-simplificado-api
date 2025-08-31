@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -49,5 +50,5 @@ public class HistoricoTransacao {
     private String descricao;
 
     @Column(name = "dt_criacao", updatable = false)
-    private Instant dtCriacao = Instant.now();
+    private ZonedDateTime dtCriacao = ZonedDateTime.now();
 }

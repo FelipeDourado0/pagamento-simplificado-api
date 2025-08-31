@@ -1,7 +1,10 @@
 package br.com.dourado.pagamento.simplificado.api.domain.entities;
 
+import br.com.dourado.pagamento.simplificado.api.domain.enums.UsuarioRoleEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -24,12 +27,13 @@ public class Permissao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true, length = 100)
-    private String codigo;
+    private UsuarioRoleEnum role;
 
     private String descricao;
 
     @Column(name = "dt_criacao", updatable = false)
-    private Instant dtCriacao = Instant.now();
+    private ZonedDateTime dtCriacao = ZonedDateTime.now();
 }

@@ -13,8 +13,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -22,7 +26,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "usuario", schema = "pagamento_simplificado")
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,5 +55,23 @@ public class Usuario {
     private boolean ativo = true;
 
     @Column(name = "dt_criacao", updatable = false)
-    private Instant dtCriacao = Instant.now();
+    private ZonedDateTime dtCriacao = ZonedDateTime.now();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.perfil.getRoleList()
+                .stream()
+                .map(it -> new SimpleGrantedAuthority(it.getRole().getRole()))
+                .toList();
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 }

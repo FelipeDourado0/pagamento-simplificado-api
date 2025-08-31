@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +43,8 @@ public class Perfil {
             joinColumns = @JoinColumn(name = "perfil_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id")
     )
-    private List<Permissao> permissoes = new ArrayList<>();
+    private List<Permissao> roleList = new ArrayList<>();
 
     @Column(name = "dt_criacao", updatable = false)
-    private Instant dtCriacao = Instant.now();
+    private ZonedDateTime dtCriacao = ZonedDateTime.now();
 }

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +40,13 @@ public class ContaCorrente {
     @Column(name = "saldo", nullable = false, precision = 19, scale = 2)
     private BigDecimal saldo = BigDecimal.ZERO;
 
-    @Column(name = "dt_criacao", updatable = false)
-    private Instant dtCriacao = Instant.now();
-
     @OneToMany(mappedBy = "contaOrigem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HistoricoTransacao> transacoesEnviadas = new ArrayList<>();
 
     @OneToMany(mappedBy = "contaDestino", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HistoricoTransacao> transacoesRecebidas = new ArrayList<>();
+    
+    @Column(name = "dt_criacao", updatable = false)
+    private ZonedDateTime dtCriacao = ZonedDateTime.now();
+
 }

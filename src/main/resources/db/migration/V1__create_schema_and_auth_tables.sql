@@ -6,7 +6,7 @@ SET search_path TO pagamento_simplificado;
 
 CREATE TABLE IF NOT EXISTS permissao (
     id BIGSERIAL PRIMARY KEY,
-    codigo VARCHAR(100) NOT NULL UNIQUE,
+    role VARCHAR(100) NOT NULL UNIQUE,
     descricao TEXT,
     dt_criacao TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
