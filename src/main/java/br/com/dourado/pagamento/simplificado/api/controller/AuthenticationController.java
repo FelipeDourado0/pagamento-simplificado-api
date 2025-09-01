@@ -4,6 +4,7 @@ import br.com.dourado.pagamento.simplificado.api.domain.dtos.AthenticationReques
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.LoginResponseDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.RegistroRequestDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
+import br.com.dourado.pagamento.simplificado.api.infra.exceptions.BasicAuthenticationEntryPointExeption;
 import br.com.dourado.pagamento.simplificado.api.service.TokenService;
 import br.com.dourado.pagamento.simplificado.api.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -29,12 +30,17 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AthenticationRequestDTO data) {
-        UsernamePasswordAuthenticationToken userNamePassowrd = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
-        Usuario usuario = (Usuario) this.authenticationManager.authenticate(userNamePassowrd).getPrincipal();
+        try {
 
-        String token = tokenService.generateToken(usuario);
+            UsernamePasswordAuthenticationToken userNamePassowrd = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
+            Usuario usuario = (Usuario) this.authenticationManager.authenticate(userNamePassowrd).getPrincipal();
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+            String token = tokenService.generateToken(usuario);
+
+            return ResponseEntity.ok(new LoginResponseDTO(token));
+        } catch (RuntimeException e) {
+            throw new BasicAuthenticationEntryPointExeption("Erro ao fazer login.", "Credenciais inválidas.");
+        }
     }
 
     @PostMapping("/register")
