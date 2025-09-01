@@ -1,6 +1,7 @@
 package br.com.dourado.pagamento.simplificado.api.service;
 
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
+import br.com.dourado.pagamento.simplificado.api.infra.exceptions.BadRequestExeption;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -28,7 +29,7 @@ public class TokenService {
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Erro ao tentar fazer login", exception);
+            throw new BadRequestExeption("Erro ao tentar fazer login", "Erro ao gerar acesso.");
         }
     }
 

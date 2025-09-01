@@ -1,4 +1,4 @@
-package br.com.dourado.pagamento.simplificado.api.config;
+package br.com.dourado.pagamento.simplificado.api.infra.config;
 
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
 import br.com.dourado.pagamento.simplificado.api.domain.repositories.UsuarioRepository;
