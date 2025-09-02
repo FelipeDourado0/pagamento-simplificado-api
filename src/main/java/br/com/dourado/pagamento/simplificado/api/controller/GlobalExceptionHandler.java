@@ -15,25 +15,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundExeption.class)
-    private ResponseEntity<ResponseExceptionDefault> handlerNotFoundExeption(NotFoundExeption exeption) {
+    public ResponseEntity<ResponseExceptionDefault> handlerNotFoundExeption(NotFoundExeption exeption) {
         ResponseExceptionDefault response = new ResponseExceptionDefault(exeption.getTitulo(), exeption.getMenssagem());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
     @ExceptionHandler(BadRequestExeption.class)
-    private ResponseEntity<ResponseExceptionDefault> handlerBadRequestExeption(BadRequestExeption exeption) {
+    public ResponseEntity<ResponseExceptionDefault> handlerBadRequestExeption(BadRequestExeption exeption) {
         ResponseExceptionDefault response = new ResponseExceptionDefault(exeption.getTitulo(), exeption.getMenssagem());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(BasicAuthenticationEntryPointExeption.class)
-    private ResponseEntity<ResponseExceptionDefault> handlerBasicAuthenticationEntryPointExeption(BasicAuthenticationEntryPointExeption exeption) {
+    public ResponseEntity<ResponseExceptionDefault> handlerBasicAuthenticationEntryPointExeption(BasicAuthenticationEntryPointExeption exeption) {
         ResponseExceptionDefault response = new ResponseExceptionDefault(exeption.getTitulo(), exeption.getMenssagem());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    private ResponseEntity<ResponseExceptionDefault> handlerAccessDeniedException(AccessDeniedException exeption) {
+    public ResponseEntity<ResponseExceptionDefault> handlerAccessDeniedException(AccessDeniedException exeption) {
         ResponseExceptionDefault response = new ResponseExceptionDefault(exeption.getTitulo(), exeption.getMenssagem());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
