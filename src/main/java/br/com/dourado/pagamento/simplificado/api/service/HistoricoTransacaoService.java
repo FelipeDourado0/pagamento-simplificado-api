@@ -34,8 +34,8 @@ public class HistoricoTransacaoService {
                 .setDescricao(descricaoUsuarioTransferencia)
                 .setTransacaoConcluida(statusTransacao.getData().getAuthorization());
 
-        if (Objects.equals(statusTransacao.getStatus(), Constantes.statusTransacaoFalha)) {
-            historicoTransacaoNovo.setMensagemErro(Constantes.menssagemErroFalhaTransacaoDefault);
+        if (Objects.equals(statusTransacao.getStatus(), Constantes.STATUS_TRANSACAO_FALHA)) {
+            historicoTransacaoNovo.setMensagemErro(Constantes.MENSAGEM_ERRO_FALHA_TRANSACAO_DEFAULT);
             salvarHistoricoTransacao(historicoTransacaoNovo);
             loggerHelper.info(this.getClass(), "Transferência negada - Historico: " + historicoTransacaoNovo);
 

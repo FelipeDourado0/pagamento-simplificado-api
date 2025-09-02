@@ -87,7 +87,7 @@ public class TransferenciaService {
     private HistoricoTransacao concluirTransferencia(Conta contaOrigem, Conta contaDestino, BigDecimal valorTransferencia, String descricaoUsuarioTransferencia) {
         calcularSaldo(contaOrigem, contaDestino, valorTransferencia);
         HistoricoTransacao historicoSalvo = salvarHistoricoTransacao(contaOrigem, contaDestino, valorTransferencia, descricaoUsuarioTransferencia);
-        salvarDadosContaCorrente(List.of(contaOrigem, contaDestino));
+        salvarDadosConta(List.of(contaOrigem, contaDestino));
 
         return historicoSalvo;
     }
@@ -102,7 +102,7 @@ public class TransferenciaService {
         contaDestino.setSaldo(contaDestino.getSaldo().plus().add(valorTransferencia));
     }
 
-    private void salvarDadosContaCorrente(List<Conta> conta) {
+    private void salvarDadosConta(List<Conta> conta) {
         contaRepository.saveAll(conta);
         contaRepository.flush();
     }

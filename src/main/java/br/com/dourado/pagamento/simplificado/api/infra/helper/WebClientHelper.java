@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 public class WebClientHelper {
 
     @Autowired
-    private WebClient webClient;
+    protected WebClient webClient;
 
     public <T> Mono<T> get(String url, Class<T> responseType) {
         return webClient.get()
