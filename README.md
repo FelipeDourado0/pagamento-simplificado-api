@@ -1,7 +1,11 @@
 # 💳 Pagamento Simplificado API
 
 API de pagamento simplificado desenvolvida em **Java + Spring Boot**, com foco em segurança, escalabilidade e boas práticas.  
-O sistema implementa cadastro de usuários e contas, autenticação JWT, controle de permissões, e fluxo de transferências financeiras com registros históricos.
+O sistema implementa:
+- cadastro de usuários e contas
+- autenticação JWT
+- controle de permissões
+- fluxo de transferências financeiras com registros históricos.
 
 ---
 
