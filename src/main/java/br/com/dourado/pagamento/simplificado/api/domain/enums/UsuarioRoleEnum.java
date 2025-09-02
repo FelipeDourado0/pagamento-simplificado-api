@@ -1,8 +1,8 @@
 package br.com.dourado.pagamento.simplificado.api.domain.enums;
 
 public enum UsuarioRoleEnum {
-    LOJISTA("lojista"),
-    CLIENTE("cliente");
+    LOJISTA("ROLE_LOJISTA"),
+    CLIENTE("ROLE_CLIENTE");
 
     private String role;
 

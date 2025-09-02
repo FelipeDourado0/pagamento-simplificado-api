@@ -11,10 +11,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.time.Instant;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -22,11 +23,13 @@ import java.time.ZonedDateTime;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "historico_transacao", schema = "pagamento_simplificado")
 public class HistoricoTransacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -38,7 +41,7 @@ public class HistoricoTransacao {
     private ContaCorrente contaDestino;
 
     @Column(name = "dt_envio_transacao", nullable = false)
-    private Instant dtEnvioTransacao = Instant.now();
+    private ZonedDateTime dtEnvioTransacao;
 
     @Column(name = "transacao_concluida", nullable = false)
     private boolean transacaoConcluida = false;
@@ -48,6 +51,9 @@ public class HistoricoTransacao {
 
     @Column(name = "descricao")
     private String descricao;
+
+    @Column(name = "valor", precision = 19, scale = 4)
+    private BigDecimal valor;
 
     @Column(name = "dt_criacao", updatable = false)
     private ZonedDateTime dtCriacao = ZonedDateTime.now();

@@ -2,6 +2,7 @@ package br.com.dourado.pagamento.simplificado.api.infra.config;
 
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
 import br.com.dourado.pagamento.simplificado.api.domain.repositories.UsuarioRepository;
+import br.com.dourado.pagamento.simplificado.api.infra.helper.LoggerHelper;
 import br.com.dourado.pagamento.simplificado.api.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,6 +22,8 @@ public class SecurityFilter extends OncePerRequestFilter {
     TokenService tokenService;
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    LoggerHelper loggerHelper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -29,7 +32,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             String email = tokenService.validateToken(token);
             Usuario user = usuarioRepository.findByEmail(email)
                     .orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
-
+            loggerHelper.info(this.getClass(), "autorizacoes: " + user.getAuthorities().toString());
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
@@ -37,8 +40,9 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     private String recoverToken(HttpServletRequest request) {
-        var authHeader = request.getHeader("Authorization");
+        String authHeader = request.getHeader("Authorization");
+        loggerHelper.info(this.getClass(), "Token recebido: " + authHeader);
         if (authHeader == null) return null;
-        return authHeader.replace("Bearer ", "");
+        return authHeader.replace("Bearer ", "").trim();
     }
 }

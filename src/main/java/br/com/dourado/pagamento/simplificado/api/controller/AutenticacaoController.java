@@ -1,8 +1,8 @@
 package br.com.dourado.pagamento.simplificado.api.controller;
 
-import br.com.dourado.pagamento.simplificado.api.domain.dtos.AthenticationRequestDTO;
-import br.com.dourado.pagamento.simplificado.api.domain.dtos.LoginResponseDTO;
-import br.com.dourado.pagamento.simplificado.api.domain.dtos.RegistroRequestDTO;
+import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.AutenticacaoRequestDTO;
+import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.LoginResponseDTO;
+import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.RegistroRequestDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
 import br.com.dourado.pagamento.simplificado.api.infra.exceptions.BasicAuthenticationEntryPointExeption;
 import br.com.dourado.pagamento.simplificado.api.service.TokenService;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("auth")
-public class AuthenticationController {
+public class AutenticacaoController {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
@@ -29,7 +29,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AthenticationRequestDTO data) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AutenticacaoRequestDTO data) {
         try {
 
             UsernamePasswordAuthenticationToken userNamePassowrd = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
@@ -45,7 +45,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<Object> register(@RequestBody @Valid RegistroRequestDTO data) {
-        usuarioService.criarUsuario(data);
+        usuarioService.cadastrarUsuario(data);
 
         return ResponseEntity.ok().build();
     }

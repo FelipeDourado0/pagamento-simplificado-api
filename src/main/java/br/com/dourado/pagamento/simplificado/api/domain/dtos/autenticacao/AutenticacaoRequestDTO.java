@@ -1,4 +1,4 @@
-package br.com.dourado.pagamento.simplificado.api.domain.dtos;
+package br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao;
 
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AthenticationRequestDTO {
+public class AutenticacaoRequestDTO {
     @NonNull
     @Email
     private String email;

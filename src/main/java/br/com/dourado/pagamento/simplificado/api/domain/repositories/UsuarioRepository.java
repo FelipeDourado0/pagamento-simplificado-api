@@ -1,6 +1,7 @@
 package br.com.dourado.pagamento.simplificado.api.domain.repositories;
 
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             "FROM Usuario u WHERE u.email = :email OR u.cpfCnpj = :cpfCnpj")
     boolean existsByEmailOrCpfCnpj(@Param("email") String email, @Param("cpfCnpj") String cpfCnpj);
 
+    @EntityGraph(attributePaths = {"perfil", "perfil.roleList", "perfil.roleList.role"})
     Optional<Usuario> findByEmail(String email);
 }
