@@ -1,23 +1,23 @@
 package br.com.dourado.pagamento.simplificado.api.domain.repositories;
 
-import br.com.dourado.pagamento.simplificado.api.domain.entities.ContaCorrente;
+import br.com.dourado.pagamento.simplificado.api.domain.entities.Conta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface ContaCorrenteRepository extends JpaRepository<ContaCorrente, Long> {
+public interface ContaRepository extends JpaRepository<Conta, Long> {
 
 
-    Optional<ContaCorrente> findByUsuarioEmail(@Param("email") String email);
+    Optional<Conta> findByUsuarioEmail(@Param("email") String email);
 
     @Query("""
-                SELECT cc FROM ContaCorrente cc
+                SELECT cc FROM Conta cc
                 JOIN FETCH cc.usuario u
                 LEFT JOIN FETCH cc.transacoesEnviadas te
                 LEFT JOIN FETCH cc.transacoesRecebidas tr
                 WHERE u.cpfCnpj = :cpfCnpj
             """)
-    Optional<ContaCorrente> findByUsuarioCpfCnpj(@Param("cpfCnpj") String cpfCnpj);
+    Optional<Conta> findByUsuarioCpfCnpj(@Param("cpfCnpj") String cpfCnpj);
 }

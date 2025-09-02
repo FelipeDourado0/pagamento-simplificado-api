@@ -3,7 +3,7 @@ package br.com.dourado.pagamento.simplificado.api.service;
 import br.com.dourado.pagamento.simplificado.api.domain.client.AutorizacaoTransacaoClient;
 import br.com.dourado.pagamento.simplificado.api.domain.constants.Constantes;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.autorizacaoTransacao.AutorizacaoTransacaoResponseDTO;
-import br.com.dourado.pagamento.simplificado.api.domain.entities.ContaCorrente;
+import br.com.dourado.pagamento.simplificado.api.domain.entities.Conta;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.HistoricoTransacao;
 import br.com.dourado.pagamento.simplificado.api.domain.repositories.HistoricoTransacaoRepository;
 import br.com.dourado.pagamento.simplificado.api.infra.exceptions.BadRequestExeption;
@@ -24,12 +24,12 @@ public class HistoricoTransacaoService {
     @Autowired
     private LoggerHelper loggerHelper;
 
-    public HistoricoTransacao criarHistoricoTransacao(ContaCorrente contaCorrenteOrigem, ContaCorrente contaCorrenteDestino, BigDecimal valorTransferencia, String descricaoUsuarioTransferencia) {
+    public HistoricoTransacao criarHistoricoTransacao(Conta contaOrigem, Conta contaDestino, BigDecimal valorTransferencia, String descricaoUsuarioTransferencia) {
         AutorizacaoTransacaoResponseDTO statusTransacao = verificaStatusTransacaoComApiExterna();
         HistoricoTransacao historicoTransacaoNovo = new HistoricoTransacao()
                 .setDtEnvioTransacao(ZonedDateTime.now())
-                .setContaDestino(contaCorrenteDestino)
-                .setContaOrigem(contaCorrenteOrigem)
+                .setContaDestino(contaDestino)
+                .setContaOrigem(contaOrigem)
                 .setValor(valorTransferencia)
                 .setDescricao(descricaoUsuarioTransferencia)
                 .setTransacaoConcluida(statusTransacao.getData().getAuthorization());

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DadosContaResponseDTO {
     UsuarioDTO dadosUsuario;
-    ContaCorrenteDTO dadosContaCorrente;
+    ContaDTO dadosConta;
 }

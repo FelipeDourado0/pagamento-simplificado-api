@@ -28,8 +28,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "conta_corrente", schema = "pagamento_simplificado")
-public class ContaCorrente {
+@Table(name = "conta", schema = "pagamento_simplificado")
+public class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,8 +52,8 @@ public class ContaCorrente {
     @Column(name = "agencia", nullable = false, length = 20)
     private String agencia;
 
-    @Column(name = "conta_corrente", nullable = false, length = 30)
-    private String contaCorrente;
+    @Column(name = "numero_conta", nullable = false, length = 30)
+    private String numeroConta;
 
     @Column(name = "dt_criacao", updatable = false)
     private ZonedDateTime dtCriacao = ZonedDateTime.now();

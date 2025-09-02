@@ -1,8 +1,8 @@
 package br.com.dourado.pagamento.simplificado.api.service;
 
-import br.com.dourado.pagamento.simplificado.api.domain.entities.ContaCorrente;
+import br.com.dourado.pagamento.simplificado.api.domain.entities.Conta;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
-import br.com.dourado.pagamento.simplificado.api.domain.repositories.ContaCorrenteRepository;
+import br.com.dourado.pagamento.simplificado.api.domain.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,24 +10,24 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 @Service
-public class ContaCorrenteService {
+public class ContaService {
     private static final Random random = new Random();
     @Autowired
-    ContaCorrenteRepository contaCorrenteRepository;
+    ContaRepository contaRepository;
 
     public void cadastrarContaCorrente(Usuario usuario, BigDecimal saldoInicial) {
-        ContaCorrente novaContaCorrente = new ContaCorrente()
+        Conta novaConta = new Conta()
                 .setUsuario(usuario)
-                .setContaCorrente(gerarContaCorrente())
+                .setNumeroConta(gerarContaCorrente())
                 .setAgencia(gerarAgencia())
                 .setSaldo(saldoInicial);
 
-        salvarContaCorrente(novaContaCorrente);
+        salvarContaCorrente(novaConta);
     }
 
-    private void salvarContaCorrente(ContaCorrente contaCorrente) {
-        contaCorrenteRepository.save(contaCorrente);
-        contaCorrenteRepository.flush();
+    private void salvarContaCorrente(Conta conta) {
+        contaRepository.save(conta);
+        contaRepository.flush();
     }
 
     private String gerarAgencia() {

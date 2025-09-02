@@ -1,6 +1,6 @@
 package br.com.dourado.pagamento.simplificado.api.domain.dtos.transferencia;
 
-import br.com.dourado.pagamento.simplificado.api.domain.entities.ContaCorrente;
+import br.com.dourado.pagamento.simplificado.api.domain.entities.Conta;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +13,14 @@ public class DadosTransferenciaUsuarioDTO {
     private String nome;
     private String cpfCnpj;
     private String agencia;
-    private String contaCorrente;
+    private String numeroConta;
 
-    public DadosTransferenciaUsuarioDTO criarDadosTransferenciaUsuarioDTO(ContaCorrente contaCorrente) {
-        Usuario usuario = contaCorrente.getUsuario();
+    public DadosTransferenciaUsuarioDTO criarDadosTransferenciaUsuarioDTO(Conta conta) {
+        Usuario usuario = conta.getUsuario();
         this.nome = usuario.getNome();
         this.cpfCnpj = usuario.getCpfCnpj();
-        this.agencia = contaCorrente.getAgencia();
-        this.contaCorrente = contaCorrente.getContaCorrente();
+        this.agencia = conta.getAgencia();
+        this.numeroConta = conta.getNumeroConta();
         return this;
     }
 }

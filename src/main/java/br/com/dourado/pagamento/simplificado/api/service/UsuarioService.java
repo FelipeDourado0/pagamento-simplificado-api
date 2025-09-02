@@ -1,14 +1,14 @@
 package br.com.dourado.pagamento.simplificado.api.service;
 
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.RegistroRequestDTO;
-import br.com.dourado.pagamento.simplificado.api.domain.dtos.conta.ContaCorrenteDTO;
+import br.com.dourado.pagamento.simplificado.api.domain.dtos.conta.ContaDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.conta.DadosContaResponseDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.conta.UsuarioDTO;
-import br.com.dourado.pagamento.simplificado.api.domain.entities.ContaCorrente;
+import br.com.dourado.pagamento.simplificado.api.domain.entities.Conta;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.HistoricoTransacao;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Perfil;
 import br.com.dourado.pagamento.simplificado.api.domain.entities.Usuario;
-import br.com.dourado.pagamento.simplificado.api.domain.repositories.ContaCorrenteRepository;
+import br.com.dourado.pagamento.simplificado.api.domain.repositories.ContaRepository;
 import br.com.dourado.pagamento.simplificado.api.domain.repositories.HistoricoTransacaoRepository;
 import br.com.dourado.pagamento.simplificado.api.domain.repositories.PerfilRepository;
 import br.com.dourado.pagamento.simplificado.api.domain.repositories.UsuarioRepository;
@@ -30,9 +30,9 @@ public class UsuarioService {
     @Autowired
     private PerfilRepository perfilRepository;
     @Autowired
-    private ContaCorrenteService contaCorrenteService;
+    private ContaService contaService;
     @Autowired
-    private ContaCorrenteRepository contaCorrenteRepository;
+    private ContaRepository contaRepository;
     @Autowired
     private HistoricoTransacaoRepository historicoTransacaoRepository;
     @Autowired
@@ -49,16 +49,16 @@ public class UsuarioService {
 
     public DadosContaResponseDTO obterDadosConta(String cpfCnpj) {
         loggerHelper.info(this.getClass(), "Iniciou busca de conta do usuário - " + ZonedDateTime.now());
-        ContaCorrente contaCorrente = contaCorrenteRepository.findByUsuarioCpfCnpj(cpfCnpj)
+        Conta conta = contaRepository.findByUsuarioCpfCnpj(cpfCnpj)
                 .orElseThrow(() -> new NotFoundExeption("Usuario não encontrado.", "Usuario não encontrado no banco."));
-        Usuario usuario = contaCorrente.getUsuario();
+        Usuario usuario = conta.getUsuario();
         UsuarioDTO usuarioDTO = new UsuarioDTO().fromUsuarioEntity(usuario);
 
         List<HistoricoTransacao> listaHistoricoTransacao = historicoTransacaoRepository.buscarHistoricoPorCpf(usuario.getCpfCnpj());
-        ContaCorrenteDTO contaCorrenteDTO = new ContaCorrenteDTO().fromContaCorrenteEntity(contaCorrente, listaHistoricoTransacao);
+        ContaDTO contaDTO = new ContaDTO().fromContaEntity(conta, listaHistoricoTransacao);
 
         loggerHelper.info(this.getClass(), "Finalizou busca de conta do usuário - " + ZonedDateTime.now());
-        return new DadosContaResponseDTO(usuarioDTO, contaCorrenteDTO);
+        return new DadosContaResponseDTO(usuarioDTO, contaDTO);
     }
 
     private void verificaSeUsuarioCadastrado(String email, String cpfCnpj) {
@@ -87,7 +87,7 @@ public class UsuarioService {
     }
 
     private void criarContaCorrente(Usuario usuario, BigDecimal saldo) {
-        contaCorrenteService.cadastrarContaCorrente(usuario, saldo);
+        contaService.cadastrarContaCorrente(usuario, saldo);
     }
 
     private Usuario salvarUsuario(Usuario novoUsuario) {

@@ -34,11 +34,11 @@ public class HistoricoTransacao {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "conta_origem_id", nullable = false)
-    private ContaCorrente contaOrigem;
+    private Conta contaOrigem;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "conta_destino_id", nullable = false)
-    private ContaCorrente contaDestino;
+    private Conta contaDestino;
 
     @Column(name = "dt_envio_transacao", nullable = false)
     private ZonedDateTime dtEnvioTransacao;
