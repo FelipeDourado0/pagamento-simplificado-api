@@ -6,10 +6,9 @@ O sistema implementa:
 - autenticação JWT
 - controle de permissões
 - fluxo de transferências financeiras com registros históricos.
-
 ---
 
-## 🚀 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Java 17**
 - **Spring Boot 3.x**
@@ -23,9 +22,15 @@ O sistema implementa:
 - **Testes:** JUnit 5 + Mockito
 - **Logging:** SLF4J com helper customizado
 
+## Ferramentas
+- Intellij
+- Abacus.AI (Agente de AI)
+- Docker Desktop
+- DBeaver
+- Postman
 ---
 
-## 🏗 Arquitetura
+## Arquitetura
 
 - **Camada API (Controller):** expõe os endpoints REST.  
 - **Camada Service:** concentra regras de negócio (transferência, cadastro, autenticação).  
@@ -37,18 +42,18 @@ O sistema implementa:
 
 ## ⚙️ Funcionalidades
 
-### 🔐 Autenticação & Autorização
+###  Autenticação & Autorização
 - Registro de usuários com criptografia BCrypt.
 - Perfis (`ROLE_CLIENTE`, `ROLE_LOJISTA`) e permissões.
 - Geração e validação de tokens JWT.
 - Proteção de endpoints com Spring Security.
 
-### 👤 Usuário & Conta
+### Usuário & Conta
 - Cadastro e consulta de **Usuários** e **Contas Correntes**.
 - Saldo inicial configurável no cadastro.
 - Consulta de dados do usuário via CPF/CNPJ.
 
-### 💸 Transferências
+### Transferências
 - Transferência entre contas com validações:
   - Não permite saldo circular (origem igual ao destino);
   - Bloqueio de pessoa jurídica enviando;
@@ -56,6 +61,14 @@ O sistema implementa:
 - Integração com API externa de autorização da transação.
 - Registro no **Histórico de Transações**.
 
-### 📊 Histórico
+### Histórico
 - Consulta de transações de um usuário via CPF/CNPJ.
 - Estrutura de log detalhada com timestamps.
+
+## Modelo Entidade Relacionamento
+
+<img width="609" height="1245" alt="image" src="https://github.com/user-attachments/assets/11743174-4010-4b87-a5df-3f92c26db91c" />
+
+
+## Projeto desenvolvido com base no desafio: 
+ - https://github.com/PicPay/picpay-desafio-backend?tab=readme-ov-file
