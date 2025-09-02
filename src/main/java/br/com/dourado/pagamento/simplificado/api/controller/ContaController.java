@@ -1,5 +1,6 @@
 package br.com.dourado.pagamento.simplificado.api.controller;
 
+import br.com.dourado.pagamento.simplificado.api.controller.interfce.IContaController;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.conta.DadosContaResponseDTO;
 import br.com.dourado.pagamento.simplificado.api.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("conta")
-public class ContaController {
+public class ContaController implements IContaController {
 
     @Autowired
     private UsuarioService usuarioService;

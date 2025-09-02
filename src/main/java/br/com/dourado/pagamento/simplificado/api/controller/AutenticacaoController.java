@@ -1,5 +1,6 @@
 package br.com.dourado.pagamento.simplificado.api.controller;
 
+import br.com.dourado.pagamento.simplificado.api.controller.interfce.IAutenticacaoController;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.AutenticacaoRequestDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.LoginResponseDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.autenticacao.RegistroRequestDTO;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("auth")
-public class AutenticacaoController {
+public class AutenticacaoController implements IAutenticacaoController {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired

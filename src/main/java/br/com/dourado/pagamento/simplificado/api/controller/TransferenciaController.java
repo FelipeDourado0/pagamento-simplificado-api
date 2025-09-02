@@ -1,5 +1,6 @@
 package br.com.dourado.pagamento.simplificado.api.controller;
 
+import br.com.dourado.pagamento.simplificado.api.controller.interfce.ITransferenciaController;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.transferencia.ExtratoTransferenciaDTO;
 import br.com.dourado.pagamento.simplificado.api.domain.dtos.transferencia.TransferenciaRequestDTO;
 import br.com.dourado.pagamento.simplificado.api.service.TransferenciaService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("transferencia")
-public class TransferenciaController {
+public class TransferenciaController implements ITransferenciaController {
     @Autowired
     TransferenciaService transferenciaService;
 

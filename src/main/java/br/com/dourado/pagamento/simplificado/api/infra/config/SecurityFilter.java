@@ -32,7 +32,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             String email = tokenService.validateToken(token);
             Usuario user = usuarioRepository.findByEmail(email)
                     .orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
-            loggerHelper.info(this.getClass(), "autorizacoes: " + user.getAuthorities().toString());
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
@@ -41,7 +40,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recoverToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        loggerHelper.info(this.getClass(), "Token recebido: " + authHeader);
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "").trim();
     }
