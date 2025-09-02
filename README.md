@@ -1,7 +1,6 @@
 # 💳 Pagamento Simplificado API
-### Programador responsável: <a href="https://www.linkedin.com/in/felipe-dourado-643889209/" target="_blank" rel="noopener noreferrer">
-Felipe Dourado
-</a>
+### Programador responsável: 
+<a href="https://www.linkedin.com/in/felipe-dourado-643889209/" target="_blank" rel="noopener noreferrer">Felipe Dourado</a>
 
 API de pagamento simplificado desenvolvida em **Java + Spring Boot**, com foco em segurança, escalabilidade e boas práticas.  
 O sistema implementa:
