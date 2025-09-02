@@ -1,5 +1,5 @@
 # 💳 Pagamento Simplificado API
-### Autor: <a https://www.linkedin.com/in/felipe-dourado-643889209/ />
+### <a href="[http://localhost:8080/swagger-ui.html](https://www.linkedin.com/in/felipe-dourado-643889209/)" target="_blank">Felipe Dourado</a>
 
 API de pagamento simplificado desenvolvida em **Java + Spring Boot**, com foco em segurança, escalabilidade e boas práticas.  
 O sistema implementa:
